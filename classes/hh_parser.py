@@ -2,7 +2,7 @@ import requests
 
 class HHParser:
     def __get_response(self):
-        params = {'sort_by':'by_vacancies_open','per_page':10}
+        params = {'sort_by': 'by_vacancies_open', 'per_page': 10}
         response = requests.get('https://api.hh.ru/employers', params=params)
         if response.status_code == 200:
             return response.json()['items']
@@ -20,13 +20,12 @@ class HHParser:
     #поиск компаний и ID
         employers = self.get_employers()
         vacancies = []
-        for employee in employers:
-            params = {'employer_id': employee['id']}
+        for employer in employers:
+            params = {'employer_id': employer['id']}
             response = requests.get('https://api.hh.ru/vacancies', params=params)
             if response.status_code == 200:
                 filtered_vacancies = self.__filter_vacancies(response.json()['items'])
                 vacancies.extend(filtered_vacancies)
-
         return vacancies
 
     @staticmethod
@@ -40,7 +39,14 @@ class HHParser:
             else:
                 salary_from = vacancy['salary']['from'] if vacancy['salary']['from'] else 0
                 salary_to = vacancy['salary']['to'] if vacancy['salary']['to'] else 0
-                filtered_vacancies.append({ 'id': vacancy['id'], 'name': vacancy['name'], 'link': vacancy['alternate_url'], 'salary_from': salary_from, 'salary_to':salary_to})
+                filtered_vacancies.append({
+                    'id': vacancy['id'],
+                    'name': vacancy['name'],
+                    'link': vacancy['alternate_url'],
+                    'salary_from': salary_from,
+                    'salary_to': salary_to
+                })
+            return filtered_vacancies
 
 
 

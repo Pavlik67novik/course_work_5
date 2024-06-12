@@ -1,8 +1,9 @@
 import requests
 
 class HHParser:
-    def __get_response(self):
-        params = {'sort_by': 'by_vacancies_open', 'per_page': 10}
+    @staticmethod
+    def __get_response():
+        params = {'sort_by': 'by_vacancies_open', 'per_page': 20}
         response = requests.get('https://api.hh.ru/employers', params=params)
         if response.status_code == 200:
             return response.json()['items']

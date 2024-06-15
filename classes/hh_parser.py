@@ -45,12 +45,12 @@ class HHParser:
                     'name': vacancy['name'],
                     'link': vacancy['alternate_url'],
                     'salary_from': salary_from,
-                    'salary_to': salary_to
+                    'salary_to': salary_to,
+                    'employer': vacancy['employer']['id']
                 })
             return filtered_vacancies
 
 
 
-
-hh = HHParser()
-print(hh.get_vacancies())
+#hh = HHParser()
+#print(hh.get_vacancies())

@@ -8,7 +8,7 @@ insert_data_in_tables(db_name)
 
 
 db = DBManager(db_name)
-print(db.get_all_vacancies())
+#print(db.get_all_vacancies())
 print('______________')
 print(db.get_companies_and_vacancies_count())
 print('______________')

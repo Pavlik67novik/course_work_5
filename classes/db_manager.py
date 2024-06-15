@@ -8,21 +8,21 @@ class DBManager:
         self.db_name = db_name
         self.conn = psycopg2.connect(dbname=self.db_name, **config())
 
-
-    def __execute_query(self, query):
-        with self.conn:
-            with self.conn.cursor() as cur:
-                cur.execute(query)
-                result = cur.fetchall()
-
-        self.conn.close()
-        return result
-
     def get_companies_and_vacancies_count(self):
-        query = 'SELECT name, COUNT(*) FROM employers ' \
-                'GROUP BY name'
+        with self.conn:
+            with self.conn.cursor() as cursor:
+                cursor.execute('SELECT employer.name, COUNT(vacancies.name) AS vacancies_count '
+                               'FROM employer LEFT JOIN vacancies ON employer.employer_id = vacancies.company_id '
+                               'GROUP BY employer.employer_name')
+                resulting = cursor.fetchall()
+                self.conn.commit()
+                print(resulting)
 
-        return self.__execute_query(query)
+    # def get_companies_and_vacancies_count(self):
+    #     query = 'SELECT name, COUNT(*) FROM employers ' \
+    #             'GROUP BY name'
+    #
+    #     return self.__execute_query(query)
 
     def get_all_vacancies(self):
         query = 'SELECT vacancies.name, employers.name, vacancies.link, vacancies.salary_from,'\

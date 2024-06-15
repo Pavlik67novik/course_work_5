@@ -3,7 +3,7 @@ import requests
 class HHParser:
     @staticmethod
     def __get_response():
-        params = {'sort_by': 'by_vacancies_open', 'per_page': 20}
+        params = {'sort_by': 'by_vacancies_open', 'per_page': 50}
         response = requests.get('https://api.hh.ru/employers', params=params)
         if response.status_code == 200:
             return response.json()['items']

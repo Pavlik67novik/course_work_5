@@ -53,4 +53,4 @@ class HHParser:
 
 
 hh = HHParser()
-print(len(hh.get_vacancies()))
+print(hh.get_vacancies())

@@ -8,13 +8,12 @@ insert_data_in_tables(db_name)
 
 
 db = DBManager(db_name)
-#print(db.get_all_vacancies())
+print(db.get_all_vacancies())
 print('______________')
 print(db.get_companies_and_vacancies_count())
 print('______________')
-#print(db.get_avg_salary())
+print(db.get_avg_salary())
 print('______________')
-#print(db.get_vacancies_with_keyword('python'))
+print(db.get_vacancies_with_higher_salary())
 print('______________')
-#print(db.get_vacancies_with_higher_salary())
-
+print(db.get_vacancies_with_keyword('Слесарь'))

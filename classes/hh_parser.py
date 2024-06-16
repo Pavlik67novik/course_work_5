@@ -40,17 +40,17 @@ class HHParser:
             else:
                 salary_from = vacancy['salary']['from'] if vacancy['salary']['from'] else 0
                 salary_to = vacancy['salary']['to'] if vacancy['salary']['to'] else 0
-                filtered_vacancies.append({
-                    'id': vacancy['id'],
-                    'name': vacancy['name'],
-                    'link': vacancy['alternate_url'],
-                    'salary_from': salary_from,
-                    'salary_to': salary_to
+            filtered_vacancies.append({
+                'id': vacancy['id'],
+                'name': vacancy['name'],
+                'link': vacancy['alternate_url'],
+                'salary_from': salary_from,
+                'salary_to': salary_to,
+                'employer': vacancy['employer']['id']
                 })
             return filtered_vacancies
 
 
 
-
-hh = HHParser()
-print(len(hh.get_vacancies()))
+#hh = HHParser()
+#print(hh.get_vacancies())

@@ -41,6 +41,20 @@ def insert_data_in_tables(db_name):
     con.close()
 
 
+def delete_database(db_name: str):
+    """
+    Удаление базы данных
+    :return: None
+    """
+    conn = psycopg2.connect(dbname='postgres', **config())
+    conn.autocommit = True
+    cur = conn.cursor()
+
+    cur.execute(f'DROP DATABASE {db_name}')
+
+    cur.close()
+    conn.close()
+
 #create_database('course_work')
 #create_tables('course_work')
 #insert_data_in_tables('course_work')

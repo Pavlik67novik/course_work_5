@@ -43,7 +43,7 @@ class DBManager:
 
     def get_vacancies_with_keyword(self, word_user):
         """ получает список всех вакансий, в названии которых содержатся переданные в метод слова, например python"""
-        query = f'SELECT * FROM vacancies WHERE name LIKE "%{word_user}%"'
+        query = f"SELECT * FROM vacancies WHERE name LIKE '%{word_user}%'"
         return self.__execute_quary(query)
 
 

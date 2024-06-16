@@ -1,4 +1,4 @@
-from util.util import create_database, create_tables, insert_data_in_tables
+from util.util import create_database, create_tables, insert_data_in_tables, delete_database
 from classes.db_manager import DBManager
 
 db_name = input('Введите название для Базы Данных\n')
@@ -44,6 +44,8 @@ try:
             break
 
 finally:
+    print("Удаление базы данных!\n")
+    delete_database(db_name)
     print("Всего Хорошего!")
 # print(db.get_all_vacancies())
 # print('______________')

@@ -2,9 +2,9 @@ from configparser import ConfigParser
 
 
 def config(filename="database.ini", section="postgresql"):
-    # create a parser
+    """ Функция для чтения содержимого файла конфигурации database.ini
+     итерирует по парам ключ-значение этой секции и добавляет их в словарь db """
     parser = ConfigParser()
-    # read config file
     parser.read(filename)
     db = {}
     if parser.has_section(section):

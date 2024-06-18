@@ -1,8 +1,11 @@
 import requests
 
 class HHParser:
+    """Класс для отправки запроса на API ресурса hh.ru для получения информации о работодателях"""
     @staticmethod
     def __get_response():
+        """ Метод для сортировки записи по кол-ву открытых вакансий с отображением по 20 записей,
+        возвращаем в формате json"""
         params = {'sort_by': 'by_vacancies_open', 'per_page': 20}
         response = requests.get('https://api.hh.ru/employers', params=params)
         if response.status_code == 200:
@@ -10,7 +13,7 @@ class HHParser:
 
 
     def get_employers(self):
-        # поиск компаний и ID
+        """ Поиск компаний и ID"""
         data = self.__get_response()
         employers = []
         for employer in data:
@@ -18,7 +21,7 @@ class HHParser:
         return employers
 
     def get_vacancies(self):
-    #поиск компаний и ID
+    """ поиск компаний и ID """
         employers = self.get_employers()
         vacancies = []
         for employer in employers:
@@ -31,7 +34,8 @@ class HHParser:
 
     @staticmethod
     def __filter_vacancies(vacancies):
-        #фильтрация вакансий
+        """ Применяем фильтр (если ЗП не указана применяет От = 0 и ДО = 0, затем создаем новый список
+         вакансий с необх. данными """
         filtered_vacancies = []
         for vacancy in vacancies:
             if vacancy['salary'] is None:
@@ -51,6 +55,3 @@ class HHParser:
             return filtered_vacancies
 
 
-
-#hh = HHParser()
-#print(hh.get_vacancies())
